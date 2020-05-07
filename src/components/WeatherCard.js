@@ -8,7 +8,7 @@ export default class WeatherCard extends React.Component {
       this.state = {
         error: null,
         isLoaded: false,
-        items: []
+        currentWeather: []
       };
     }
   
@@ -19,7 +19,7 @@ export default class WeatherCard extends React.Component {
           (result) => {
             this.setState({
               isLoaded: true,
-              items: [result.name, result.weather[0].main, result.main.temp, result.main.humidity, result.wind.speed] 
+              currentWeather: [result.name, result.weather[0].main, result.main.temp, result.main.humidity, result.wind.speed] 
             });
           },
           // Note: it's important to handle errors here
@@ -35,7 +35,7 @@ export default class WeatherCard extends React.Component {
     }
   
     render() {
-      const { error, isLoaded, items } = this.state;
+      const { error, isLoaded, currentWeather } = this.state;
       if (error) {
         let htmlReturn = <div>Error: {error.message}</div>;
         return <SimplePaper children = {htmlReturn} />
@@ -43,7 +43,7 @@ export default class WeatherCard extends React.Component {
         let htmlReturn = <div>Loading...</div>;
         return <SimplePaper children = {htmlReturn} />
       } else {
-        let htmlReturn = <ul>{items.map(item => (<li key={item.name}>{item}</li>))}</ul>
+        let htmlReturn = <ul>{currentWeather.map(item => (<li key={item.name}>{item}</li>))}</ul>
         return (
         <div>
         <SimplePaper children = {htmlReturn} />
