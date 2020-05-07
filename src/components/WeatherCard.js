@@ -39,7 +39,8 @@ export default class WeatherCard extends React.Component {
         let htmlReturn = <div>Error: {error.message}</div>;
         return <SimplePaper children = {htmlReturn} />
       } else if (!isLoaded) {
-        return <div>Loading...</div>;
+        let htmlReturn = <div>Loading...</div>;
+        return <SimplePaper children = {htmlReturn} />
       } else {
         return (
           <ul>
