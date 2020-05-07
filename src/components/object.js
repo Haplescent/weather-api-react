@@ -11,4 +11,5 @@ let object = {
     "timezone":-25200,
     "id":5391959,
     "name":"San Francisco",
-    "cod":200}
+    "cod":200
+}
