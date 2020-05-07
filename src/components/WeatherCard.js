@@ -12,13 +12,13 @@ export default class WeatherCard extends React.Component {
     }
   
     componentDidMount() {
-      fetch("https://api.example.com/items")
+      fetch("https://api.openweathermap.org/data/2.5/weather?q=San%20Francisco&appid=344b01fedf4f336e1535a4118f1c46df")
         .then(res => res.json())
         .then(
           (result) => {
             this.setState({
               isLoaded: true,
-              items: result.items
+              items: result.name
             });
           },
           // Note: it's important to handle errors here
@@ -42,15 +42,8 @@ export default class WeatherCard extends React.Component {
         let htmlReturn = <div>Loading...</div>;
         return <SimplePaper children = {htmlReturn} />
       } else {
-        return (
-          <ul>
-            {items.map(item => (
-              <li key={item.name}>
-                {item.name} {item.price}
-              </li>
-            ))}
-          </ul>
-        );
+        let htmlReturn = <ul>{items}</ul>
+        return <SimplePaper children = {htmlReturn} />
       }
     }
   }
