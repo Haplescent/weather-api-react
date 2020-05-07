@@ -1,5 +1,6 @@
 import SimplePaper from './Paper';
 import React from 'react';
+import ImgMediaCard from './ForecastCard';
 
 export default class WeatherCard extends React.Component {
     constructor(props) {
@@ -43,9 +44,7 @@ export default class WeatherCard extends React.Component {
         return <SimplePaper children = {htmlReturn} />
       } else {
         let htmlReturn = <ul>{items.map(item => (<li key={item.name}>{item}</li>))}</ul>
-        return <SimplePaper children = {htmlReturn} />
+        return <div><SimplePaper children = {htmlReturn} /><ImgMediaCard/></div>
       }
     }
   }
-
-
