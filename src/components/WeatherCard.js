@@ -1,6 +1,6 @@
 import SimplePaper from './Paper';
 import React from 'react';
-import ImgMediaCard from './ForecastCard';
+import SpacingGrid from './SpacingGrid';
 
 export default class WeatherCard extends React.Component {
     constructor(props) {
@@ -44,7 +44,12 @@ export default class WeatherCard extends React.Component {
         return <SimplePaper children = {htmlReturn} />
       } else {
         let htmlReturn = <ul>{items.map(item => (<li key={item.name}>{item}</li>))}</ul>
-        return <div><SimplePaper children = {htmlReturn} /><ImgMediaCard/></div>
+        return (
+        <div>
+        <SimplePaper children = {htmlReturn} />
+        <SpacingGrid/>
+        </div>
+        )
       }
     }
   }
