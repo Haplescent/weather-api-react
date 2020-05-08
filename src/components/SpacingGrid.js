@@ -44,7 +44,7 @@ export default function SpacingGrid(props) {
   //     }
   //   });
 
-    console.log(fiveDayForecast[1])
+    // console.log(fiveDayForecast[1])
   return (
     <Grid container className={classes.root} spacing={1}>
       <Grid item xs={12}>

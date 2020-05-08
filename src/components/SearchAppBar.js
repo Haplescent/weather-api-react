@@ -63,16 +63,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar() {
+export default function SearchAppBar(props) {
   const classes = useStyles();
-
+  // const handleChange = props.handleChange;
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           {TemporaryDrawer()}
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
+            <div className={classes.searchIcon} onClick={(event) => {props.handleChange(event)}}>
               <SearchIcon />
             </div>
             <InputBase

@@ -17,17 +17,17 @@ export default class SpacingGridClass extends React.Component {
   }
 
   componentDidMount() {
-      console.log(this.state.coord[0])
-      console.log(this.state.coord[1])
+    //   console.log(this.state.coord[0])
+    //   console.log(this.state.coord[1])
     fetch(
         `https://api.openweathermap.org/data/2.5/onecall?lat=${this.state.coord[0]}&lon=${this.state.coord[0]}&%20exclude=hourly,daily&appid=344b01fedf4f336e1535a4118f1c46df&units=imperial`
       ).then(
         (res) => res.json()
         ).then((res) => {
-        console.log(res)
-        console.log(res.daily[this.state.value].dew_point)
-        console.log(typeof(res.daily[this.state.value]))
-        console.log(this.state.value)
+        // console.log(res)
+        // console.log(res.daily[this.state.value].dew_point)
+        // console.log(typeof(res.daily[this.state.value]))
+        // console.log(this.state.value)
         this.setState({
             forecast: res.daily[this.state.value],
             isLoaded: true,
