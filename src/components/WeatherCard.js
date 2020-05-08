@@ -1,6 +1,7 @@
 import SimplePaper from "./Paper";
 import React from "react";
 import SpacingGrid from "./SpacingGrid";
+import SpacingGridClass from "./SpacingGridClass"
 
 export default class WeatherCard extends React.Component {
   constructor(props) {
