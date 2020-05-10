@@ -26,7 +26,7 @@ export default class WebsiteClass extends React.Component {
     return (
       <div className="App">
         <SearchAppBar handleChange={this.handleChange} />
-        <WeatherCard />
+        <WeatherCard textInput={this.state.textInput} />
       </div>
     );
   }
