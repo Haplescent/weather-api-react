@@ -66,3 +66,9 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### `Information flow of website`
+
+App.js will be a class component that has a state.  Upon App.js mounting, constructor method will be called and state with attribute called textInput will be assigned to an empty string.  Class App.js will have a method call handleSubmit() which will setState of textInput.  App.js will then render a functional component called SearchAppBar, passing this.handleSubmit method into SearchAppBar's props.  SearchAppBar will then render functional component TemporaryDrawer.  SearchAppBar will have a helper function named handleClick which will execute props.handleSubmit. SearchAppBar will then render a functional component Form and pass handleClick into Form props as onSubmit .  Form is a functional component from material designs UI which will run prop.onSubmit on clicking or hitting enter. Form's prop.onSubmit will call SearchAppbar's props.handleClick which will call App's this.handleSubmit which will call setState() to change state and this restart the react lifecycle.
+
+When textInput from App.js has been changed via setState() in the class method call handleSubmit(), React will run getDerivedStatefromProps, which will do nothing, and shouldComponentUpdate, which will return true.  App.js will then run render, rerender as described above.  App.js will then call componentDidMount, which will call fetch().  Fetch will use this.state.textInput to search cities using the following url api.openweathermap.org/data/2.5/weather?q={textInput}&appid={your api key}.  fetch will return a object which componentDidMount will parse into 
