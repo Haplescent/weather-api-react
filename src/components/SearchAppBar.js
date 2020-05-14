@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar() {
+export default function SearchAppBar(props) {
   const classes = useStyles();
 
   return (
@@ -71,7 +71,7 @@ export default function SearchAppBar() {
       <AppBar position="static">
         <Toolbar>
           {TemporaryDrawer()}
-          <div className={classes.search}>
+          <form className={classes.search} onSubmit={props.handleclick}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -83,7 +83,7 @@ export default function SearchAppBar() {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+          </form>
           <Typography className={classes.title} variant="h6" noWrap>
             Weather Report
           </Typography>
