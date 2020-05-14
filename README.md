@@ -67,11 +67,11 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
-### `Information flow of website`
+### Information flow of website
 
 1. App.js will be a class component that has a state. Upon App.js mounting, constructor method will be called and state with attributes called textInput, currentWeather, fiveDayForecast, and searchHistory will be assigned to an empty string, empty object, empty object and empty array respectively. Class App.js will have a method call handleSubmit() which will setState of textInput.
 
-2. When App.js renders, it will call a functional component called SearchAppBar, passing this.handleSubmit method into SearchAppBar's props. SearchAppBar will render a tempoary drawer and pass props searchHistry. SearchAppBar will then render functional component TemporaryDrawer. SearchAppBar will have a helper function named handleClick which will execute props.handleSubmit. SearchAppBar will then render a functional component Form and pass handleClick into Form props as onSubmit . Form is a functional component from material designs UI which will run prop.onSubmit on clicking or hitting enter. While App.js will render these children functional props on mounting, it will not call setState() until a click has occured.
+2. When App.js renders, it will call a functional component called SearchAppBar, passing this.handleSubmit method and searchHisotry array into SearchAppBar's props. SearchAppBar will render a tempoary drawer and pass props searchHistry.  TemporaryDrawer will render searchHistry.   SearchAppBar will have a helper function named handleClick which will execute props.handleSubmit. SearchAppBar will then render a functional component Form and pass handleClick into Form props as onSubmit . Form is a functional component from material designs UI which will run prop.onSubmit on clicking or hitting enter. While App.js will render these children functional props on mounting, it will not call setState() until a click has occured.
 
 3. App.js will render CurrentWeatherCard functional component, passing prop currentWeather (an empty object). CurrentWeatherCard will see an empty object in props and render the introduction card, this introduction card will have basic information about the website.
 
@@ -81,15 +81,17 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 6. After componentDidMount finishes, App.js class component, as well as all children components of App.js, is fully mounted and ready for user input.
 
-7. The user inputs text (which will be a city name the user wants the weather for) and hits the submit but or enter. Form's prop.onSubmit will call SearchAppbar's props.handleClick which will call App's this.handleSubmit which will call setState() to change state. this will start the react lifecycle.
+7. The user inputs text (which will be a city name the user wants the weather for) and hits the submit but or enter. Form's prop.onSubmit will call SearchAppbar's props.handleClick which will call App's this.handleSubmit which will call setState() to change attribute textInput in state.  this.handleSubmit will also push attibute textInput to searchHistory array in setState. this will start the react lifecycle.
 
-8. React will run shouldComponentUpdate(). shouldComponentUpdate will compare prevprops to props and see a change in textInput and return true.
+8. React will run shouldComponentUpdate(). shouldComponentUpdate will compare prevState to State and see a change in textInput and return true.
 
-9. React will repeat Steps 2-4. It will continue to render the intro screen in CurrentWeatherCard functional component and nothing in FiveDayForecast functional component, as their respective props are still empty.
+9. React will repeat Steps 2-4. I will render searchHistry array in TemporaryDrawwer.  It will continue to render the previous screen in CurrentWeatherCard functional component and FiveDayForecast functional component, as their respective props haven't changed.
 
 10. App.js will then call componentDidUpdate, which will call fetch(). fetch will use this.state.textInput to search cities using the following url api.openweathermap.org/data/2.5/weather?q={textInput}&appid={your api key}. fetch will return a object which componentDidMount will parse. Fetch will be sucessful, given that user inputted a city. The currentWeather object and fiveDayForecast this.state objects willl be reassgined using setState(). This will restart the react lifecycle.
 
 11. React will run shouldComponentUpdate(). shouldComponentUpdate will compare prevState to state and see a change in currentWeather and fiveDayForecast object and return true.
+
+12. React will repeat step 2.
 
 12. App.js will render CurrentWeatherCard functional component, passing prop currentweather (now an objecting containing current weather information from openweathermap api. CurrentWeatherCard will parse through this object and display the object's information using pictures and text)
 
@@ -97,7 +99,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 14. React will repeat step 10.
 
-15. react will run shouldComponentUpdate(). shouldComponentUpdate will compare prevProps to props and prevState to state and see no change. shouldComponentUpdate will return false
+15. react will run shouldComponentUpdate(). shouldComponentUpdate will compare prevState to state and see no change. shouldComponentUpdate will return false
 
 16. react will then do nothing and will wait for user input.
 
