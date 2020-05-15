@@ -20,6 +20,14 @@ export default class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  shouldComponentUpdate(nextState) {
+    console.log(`comparing ${this.state.textInput} to ${nextState.textInput}`);
+    return (
+      this.state.textInput != nextState.textInput ||
+      this.state.textInput != nextState.currentWeather
+    );
+  }
+
   handleSubmit(textToHandle) {
     // event.preventDefault();
     console.log("handleSubmit button in App class component working");
