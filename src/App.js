@@ -23,13 +23,12 @@ export default class App extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(`comparing ${this.state.textInput} to ${nextState.textInput} in shouldComponentUpdate`);
+    console.log(`Is ${this.state.textInput} to ${nextState.textInput} in shouldComponentUpdate Different?`);
     console.log(this.state.textInput !== nextState.textInput);
-    console.log(`comparing ${this.state.currentWeather} to ${nextState.currentWeather}`)
-    console.log(Object.keys(this.state.currentWeather).length != Object.keys(nextState.currentWeather).length);
+    // console.log(`Is ${this.state.currentWeather} to ${nextState.currentWeather} in shouldComponentUpdate Different`)
+    // console.log(Object.keys(this.state.currentWeather).length != Object.keys(nextState.currentWeather).length);
     return (
-      this.state.textInput != nextState.textInput ||
-      Object.keys(this.state.currentWeather).length != Object.keys(nextState.currentWeather).length
+      this.state.textInput != nextState.textInput
     );
   }
 
@@ -39,6 +38,7 @@ export default class App extends React.Component {
     .catch(error => {
       this.setState({
         currentWeather: {},
+        textInput: ""
       })
     })
     .then(response => response.json())
@@ -53,13 +53,14 @@ export default class App extends React.Component {
         this.setState({
           currentWeather: apiCallOne,
           fiveDayForecast: apiCallTwo.daily,
-          textInput: this.state.textInput
+          textInput: ""
         })
       })
     })
     .catch(error => {
       this.setState({
         currentWeather: {},
+        textInput: ""
       })
     });
 
