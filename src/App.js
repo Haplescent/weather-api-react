@@ -11,6 +11,7 @@ import FiveDayForecast from "./components/FiveDayForecast";
 
 export default class App extends React.Component {
   constructor(props) {
+    console.log("Mounting App.js")
     super(props);
     this.state = {
       textInput: "",
@@ -22,19 +23,48 @@ export default class App extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(`comparing ${this.state.textInput} to ${nextState.textInput}`);
-    console.log(Object.keys(this.state.currentWeather).length === 0);
+    console.log(`comparing ${this.state.textInput} to ${nextState.textInput} in shouldComponentUpdate`);
+    console.log(this.state.textInput !== nextState.textInput);
+    console.log(`comparing ${this.state.currentWeather} to ${nextState.currentWeather}`)
+    console.log(Object.keys(this.state.currentWeather).length != Object.keys(nextState.currentWeather).length);
     return (
       this.state.textInput != nextState.textInput ||
-      this.state.currentWeather != nextState.currentWeather
+      Object.keys(this.state.currentWeather).length != Object.keys(nextState.currentWeather).length
     );
   }
 
   componentDidUpdate(){
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=San%20Francisco&appid=34e8be8ab272c61ff78f3bb3d24efbe0')
-  .then(response => response.json())
-  .then(data => console.log(data));
+    console.log(`componentDidUpdate now making API call with ${this.state.textInput}`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.textInput}&appid=34e8be8ab272c61ff78f3bb3d24efbe0`)
+    .catch(error => {
+      this.setState({
+        currentWeather: {},
+      })
+    })
+    .then(response => response.json())
+    .then(apiCallOne => {
+      console.log(apiCallOne)
+      let lon = apiCallOne.coord.lon
+      let lat = apiCallOne.coord.lat
+      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&appid=34e8be8ab272c61ff78f3bb3d24efbe0`)
+      .then(response => response.json())
+      .then(apiCallTwo => {
+        console.log(apiCallTwo)
+        this.setState({
+          currentWeather: apiCallOne,
+          fiveDayForecast: apiCallTwo.daily,
+          textInput: this.state.textInput
+        })
+      })
+    })
+    .catch(error => {
+      this.setState({
+        currentWeather: {},
+      })
+    });
 
+
+  
   }
 
   handleSubmit(textToHandle) {
@@ -49,7 +79,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.searchHistory);
+    console.log("rendering App.js")
+    // console.log(this.state.searchHistory);
+    // console.log(this.state.currentWeather)
     return (
       <div>
         <SearchForm handleClick={this.handleSubmit} />
