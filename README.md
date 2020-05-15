@@ -83,7 +83,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 7. The user inputs text (which will be a city name the user wants the weather for) and hits the submit but or enter. Form's prop.onSubmit will call SearchAppbar's props.handleClick which will call App's this.handleSubmit which will call setState() to change attribute textInput in state.  this.handleSubmit will also push attibute textInput to searchHistory array in setState. this will start the react lifecycle.
 
-8. React will run shouldComponentUpdate(). shouldComponentUpdate will compare prevState to State and see a change in textInput and return true.
+8. React will run shouldComponentUpdate(). shouldComponentUpdate will compare nextState to state and see a change in textInput and return true.
 
 9. React will repeat Steps 2-4. I will render searchHistry array in TemporaryDrawwer.  It will continue to render the previous screen in CurrentWeatherCard functional component and FiveDayForecast functional component, as their respective props haven't changed.
 
