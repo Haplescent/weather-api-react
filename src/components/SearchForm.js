@@ -21,9 +21,8 @@ export default class SearchForm extends React.Component {
     let eventObject = event.target.getAttribute("value");
     console.log("handleSubmit is working");
     console.log(eventObject);
-    this.setState({ value: "" })
+    this.setState({ value: "" });
     this.props.handleClick(eventObject);
-    
   }
 
   render() {
