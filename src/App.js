@@ -5,14 +5,16 @@ import SearchAppBar from "./components/SearchAppBar";
 import TemporaryDrawer from "./components/TemporaryDrawer";
 import WeatherCard from "./components/CurrentWeather";
 import SearchForm from "./components/SearchForm";
+import CurrentWeatherv2 from "./components/CurrentWeatherv2";
+import PreviousSearchHistory from "./components/PreviousSearchHistory";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       textInput: "",
-      currentWeather: {},
-      fiveDayForecast: {},
+      currentWeather: undefined,
+      fiveDayForecast: [],
       searchHistory: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,7 +23,7 @@ export default class App extends React.Component {
   handleSubmit(textToHandle) {
     // event.preventDefault();
     console.log("handleSubmit button in App class component working");
-    let historyToPush = [];
+    let historyToPush = this.state.searchHistory.slice();
     historyToPush.push(textToHandle);
     this.setState({
       textInput: textToHandle,
@@ -34,6 +36,8 @@ export default class App extends React.Component {
     return (
       <div>
         <SearchForm handleClick={this.handleSubmit} />
+        <CurrentWeatherv2 currentWeatherObj={this.state.currentWeather} />
+        <PreviousSearchHistory searchHistory={this.state.searchHistory} />
       </div>
     );
   }
