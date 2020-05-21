@@ -16,8 +16,7 @@ export default function CurrentWeatherv2(props) {
         children={
           <div>
             <h1>
-              City: {weatherObj.name} lon {weatherObj.coord.lon} lat{" "}
-              {weatherObj.coord.lat}
+              City: {weatherObj.name}
             </h1>
             <h1>Weather: {weatherObj.weather[0].description}</h1>
             <h1>Temperature: {weatherObj.main.temp}</h1>

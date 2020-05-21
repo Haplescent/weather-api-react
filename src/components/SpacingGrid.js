@@ -32,7 +32,7 @@ export default function SpacingGrid(props) {
     html = <Grid container className={classes.root} spacing={1}>
     <Grid item xs={12}>
       <Grid container justify="left" spacing={spacing}>
-        {[0, 1, 2, 3, 4, 5].map((value) => (
+        {[0, 1, 2, 3, 4].map((value) => (
           <Grid key={value} item>
             <Paper elevation={3} className={classes.paper} children={<FiveDayForecast forecast={forecastArray[value]} value={value}/>}/>
           </Grid>
