@@ -39,7 +39,7 @@ export default class App extends React.Component {
       `componentDidUpdate now making API call with ${this.state.textInput}`
     );
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${this.state.textInput}&appid=34e8be8ab272c61ff78f3bb3d24efbe0`
+      `https://api.openweathermap.org/data/2.5/weather?q=${this.state.textInput}&units=imperial&appid=34e8be8ab272c61ff78f3bb3d24efbe0`
     )
       .catch((error) => {
         this.setState({
@@ -53,7 +53,7 @@ export default class App extends React.Component {
         let lon = apiCallOne.coord.lon;
         let lat = apiCallOne.coord.lat;
         fetch(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&appid=34e8be8ab272c61ff78f3bb3d24efbe0`
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=hourly,minutely&appid=34e8be8ab272c61ff78f3bb3d24efbe0`
         )
           .then((response) => response.json())
           .then((apiCallTwo) => {
