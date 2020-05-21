@@ -8,6 +8,8 @@ import SearchAppBar from "./components/SearchAppBar";
 import SearchForm from "./components/SearchForm";
 import TemporaryDrawer from "./components/TemporaryDrawer";
 import logo from "./logo.svg";
+import SpacingGrid from "./components/SpacingGrid";
+
 
 import "./App.css";
 
@@ -97,7 +99,7 @@ export default class App extends React.Component {
           handleClick={this.handleSubmit}
         />
         <CurrentWeatherv2 currentWeatherObj={this.state.currentWeather} />
-        <FiveDayForecast forecastArray={this.state.fiveDayForecast} />
+        <SpacingGrid forecastArray={this.state.fiveDayForecast} />
       </div>
     );
   }
